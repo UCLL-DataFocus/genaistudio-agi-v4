@@ -1,7 +1,8 @@
-import streamlit as st
-from streamlit import session_state as ss
 import random
 import time
+
+import streamlit as st
+from streamlit import session_state as ss
 
 if "abort" not in ss:
     ss["abort"] = False
@@ -96,7 +97,9 @@ def app():
         ) as status:
             while True:
                 next_message = random.choice(loading_messages)
-                while next_message == last_message:  # Ensure it's not the same as the last message
+                while (
+                    next_message == last_message
+                ):  # Ensure it's not the same as the last message
                     next_message = random.choice(loading_messages)
                 last_message = next_message  # Update the last message
                 st.write(next_message)
