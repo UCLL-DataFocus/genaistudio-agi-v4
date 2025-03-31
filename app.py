@@ -89,12 +89,17 @@ def app():
     ]
 
     def loop():
+        last_message = None  # Track the last message
         with st.status(
             f"Verwerken... even geduld aub! Aantal tokens gebruikt: {ss['tokens']}",
             expanded=True,
         ) as status:
             while True:
-                st.write(random.choice(loading_messages))
+                next_message = random.choice(loading_messages)
+                while next_message == last_message:  # Ensure it's not the same as the last message
+                    next_message = random.choice(loading_messages)
+                last_message = next_message  # Update the last message
+                st.write(next_message)
                 ss["tokens"] += random.randint(1, 10000)
                 time.sleep(5)
                 status.update(
