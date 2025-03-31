@@ -178,7 +178,10 @@ def app() -> None:
                 initialise=False,
             )
 
-        if st.button("Start het redeneerproces", icon="✨") and user_question:
+        if (
+            st.button("Start het redeneerproces", icon="✨", disabled=ss["endgame"])
+            and user_question
+        ):
             response = f"🤖 **{ss['chosen_model']}**: Bedankt voor je intelligente vraag, ik start mijn onderzoek en kom dadelijk bij je terug!"
             st.write(response)
 
@@ -186,9 +189,9 @@ def app() -> None:
             loop("🛠️ Verwerken... even geduld a.u.b. | Aantal tokens gebruikt:")
 
     else:
-        st.subheader("De maatschappelijke impact van GenAI")
+        st.subheader("💡 De maatschappelijke impact van GenAI")
         st.write(
-            """Hoewel dit momenteel - gelukkig - nog een aprilgrap was, is het belangrijk dat je op de hoogte bent van de impact van generatieve AI op onze maatschappij. GenAI is een krachtige technologie die ons kan helpen bij het creëren van nieuwe ideeën, het verbeteren van processen en het oplossen van complexe problemen. Maar zoals met elke technologie, zijn er ook risico's en uitdagingen verbonden aan het gebruik ervan. Zo kan GenAI bijvoorbeeld desinformatie (fake news) in de hand werken, stereotypes versterken, of ons grondig doen nadenken over wat ons precies creatief en intelligent maakt. Daarnaast heeft de technologie ook een sterke ecologische voetafdruk (op vlak van energieverbuik en waterverbruik voor koeling van de krachtige servers waarop het draait. Uiteraard is dat niet alleen voor deze technologie, en hebben we als mensen óók een grote ecologische voetafdruk. Maar het is wel belangrijk dat we ons daar bewust van zijn, en dat we ons afvragen of we deze technologie wel nodig hebben.
+            """Hoewel dit momenteel - gelukkig - nog een aprilgrap was, is het belangrijk dat je op de hoogte bent van de impact van generatieve AI op onze maatschappij. GenAI is een krachtige technologie die ons kan helpen bij het creëren van nieuwe ideeën, het verbeteren van processen en het oplossen van complexe problemen. Maar zoals met elke technologie, zijn er ook risico's en uitdagingen verbonden aan het gebruik ervan. Zo kan GenAI bijvoorbeeld desinformatie (fake news) in de hand werken, stereotypes versterken, of ons grondig doen nadenken over wat ons precies creatief en intelligent maakt. Daarnaast heeft de technologie ook een sterke ecologische voetafdruk (op vlak van energieverbuik en waterverbruik voor koeling van de krachtige servers waarop het draait. Uiteraard is dat niet alleen voor deze technologie, en hebben we als mensen óók een grote ecologische voetafdruk. Maar het is wel belangrijk dat we ons daar bewust van zijn, en dat we de technologie vooral gebruiken wanneer het een meerwaarde biedt en niet zomaar 'omdat het kan'.
 
 Meer hierover leren? Houd dan zeker de [LinkedInpagina van GPT Academy](https://www.linkedin.com/company/gpt-academy) in de gaten, want binnenkort lanceren we een gratis e-learninghoofdstuk waar we ingaan op die maatschappelijke impact.
 
