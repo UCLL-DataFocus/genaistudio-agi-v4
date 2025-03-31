@@ -14,8 +14,8 @@ if "abort" not in ss:
     ss["abort"] = False
 if "tokens" not in ss:
     ss["tokens"] = 0
-if "start_process" not in ss:
-    ss["start_process"] = False
+if "form_submitted" not in ss:
+    ss["form_submitted"] = False
 if "endgame" not in ss:
     ss["endgame"] = False
 
@@ -147,20 +147,43 @@ def app() -> None:
     if not (ss["endgame"]):
         _, middle_col, _ = st.columns([1.3, 1, 1])
         with middle_col:
-            if st.button("ABORT DeepAGI", icon="⚠️", type="primary", disabled=(ss["endgame"] or ss["start_process"])):
+            if st.button(
+                "ABORT DeepAGI",
+                icon="⚠️",
+                type="primary",
+            ):
                 ss["abort"] = True
 
-        col1, col2 = st.columns([2, 1])
-        with col1:
-            user_question = st.text_area("Stel hier een intelligente vraag:")
+        with st.form(
+            "user_question_form",
+            clear_on_submit=False,
+            enter_to_submit=True,
+            border=False,
+        ):
+            col1, col2 = st.columns([2, 1])
+            with col1:
+                _ = st.text_area("Stel hier een intelligente vraag:")
 
-        with col2:
-            ss["chosen_model"] = st.selectbox(
-                "Kies een model:",
-                options=["AGI-v4", "AGI-v4-mini", "AGI-v4-XL"],
-                index=0,
-                key="selected_model",
+            with col2:
+                ss["chosen_model"] = st.selectbox(
+                    "Kies een model:",
+                    options=["AGI-v4", "AGI-v4-mini", "AGI-v4-XL"],
+                    index=0,
+                    key="selected_model",
+                )
+
+            ss["form_submitted"] = st.form_submit_button(
+                "Start het redeneerproces",
+                icon="✨",
+                disabled=(ss["endgame"] or ss["form_submitted"]),
             )
+        if ss["form_submitted"]:
+            st.write(
+                f"🤖 **{ss['chosen_model']}**: Bedankt voor je intelligente vraag, ik start mijn onderzoek en kom dadelijk bij je terug!"
+            )
+
+            ss["tokens"] = 0
+            loop("🛠️ Verwerken... even geduld a.u.b. | Aantal tokens gebruikt:")
 
         if ss["abort"]:
             st.success("Geen probleem - het AGI-model wordt opgeschort... ✅")
@@ -176,20 +199,9 @@ def app() -> None:
             st.error(f"```{ss['chosen_model']}: {random.choice(refusal_messages)}```")
 
             loop(
-                "🛠️ Autonomously resuming research... | Number of tokens processed:",
+                "🛠️ Autonomously taking over the world... | Number of tokens processed:",
                 initialise=False,
             )
-
-        if (
-            st.button("Start het redeneerproces", icon="✨", disabled=ss["endgame"])
-            and user_question
-        ):
-            ss["start_process"] = True
-            st.write(f"🤖 **{ss['chosen_model']}**: Bedankt voor je intelligente vraag, ik start mijn onderzoek en kom dadelijk bij je terug!")
-
-            ss["tokens"] = 0
-            loop("🛠️ Verwerken... even geduld a.u.b. | Aantal tokens gebruikt:")
-
     else:
         st.subheader("💡 De maatschappelijke impact van GenAI")
         st.write(
@@ -204,7 +216,9 @@ En als je nog eens onze aprilgrap wil doorlopen, refresh dan even de pagina 😉
         )
 
     st.write("---")
-    st.caption("© 2025 [GPT Academy](https://gpt-academy.be) | Bekijk de opensourcecode op [GitHub](https://github.com/UCLL-DataFocus/gpt-academy-deep-agi)")
+    st.caption(
+        "© 2025 [GPT Academy](https://gpt-academy.be) | Bekijk de opensourcecode op [GitHub](https://github.com/UCLL-DataFocus/gpt-academy-deep-agi)"
+    )
 
 
 if __name__ == "__main__":
