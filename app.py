@@ -14,6 +14,8 @@ if "abort" not in ss:
     ss["abort"] = False
 if "tokens" not in ss:
     ss["tokens"] = 0
+if "start_process" not in ss:
+    ss["start_process"] = False
 if "endgame" not in ss:
     ss["endgame"] = False
 
@@ -145,7 +147,7 @@ def app() -> None:
     if not (ss["endgame"]):
         _, middle_col, _ = st.columns([1.3, 1, 1])
         with middle_col:
-            if st.button("ABORT DeepAGI", icon="⚠️", type="primary", disabled=ss["endgame"]):
+            if st.button("ABORT DeepAGI", icon="⚠️", type="primary", disabled=(ss["endgame"] or ss["start_process"])):
                 ss["abort"] = True
 
         col1, col2 = st.columns([2, 1])
@@ -182,8 +184,8 @@ def app() -> None:
             st.button("Start het redeneerproces", icon="✨", disabled=ss["endgame"])
             and user_question
         ):
-            response = f"🤖 **{ss['chosen_model']}**: Bedankt voor je intelligente vraag, ik start mijn onderzoek en kom dadelijk bij je terug!"
-            st.write(response)
+            ss["start_process"] = True
+            st.write(f"🤖 **{ss['chosen_model']}**: Bedankt voor je intelligente vraag, ik start mijn onderzoek en kom dadelijk bij je terug!")
 
             ss["tokens"] = 0
             loop("🛠️ Verwerken... even geduld a.u.b. | Aantal tokens gebruikt:")

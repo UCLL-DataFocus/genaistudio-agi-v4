@@ -3,9 +3,9 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]  # https://python-poetry.org/docs/pyproject/
-name = "genaistudio-agi-v4"
+name = "gpt-academy-deep-agi"
 version = "4.0.0"
-description = "Artificial General Intelligence, powered by GPT Academy."
+description = "Artificiële Algemene Intelligentie voor iedereen, door GPT Academy."
 authors = ["Joren Bex, Michael Bauwens, Heike Pauli, Jonas Buysse"]
 readme = "README.md"
 package-mode = false
@@ -15,9 +15,6 @@ streamlit = "1.41.1"
 poethepoet = "^0.33.0"
 python = ">=3.10.9,<4.0"
 python-dotenv = "^1.0.1"
-langchain-openai = "^0.2.8"
-langchain-mistralai = "^0.2.6"
-pydantic = "^2.11.1"
 
 [tool.poetry.group.test.dependencies]  # https://python-poetry.org/docs/master/managing-dependencies/
 coverage = { extras = ["toml"], version = ">=7.4.4" }
