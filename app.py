@@ -145,7 +145,7 @@ def app() -> None:
     if not (ss["endgame"]):
         _, middle_col, _ = st.columns([1.3, 1, 1])
         with middle_col:
-            if st.button("ABORT DeepAGI", icon="⚠️", type="primary"):
+            if st.button("ABORT DeepAGI", icon="⚠️", type="primary", disabled=ss["endgame"]):
                 ss["abort"] = True
 
         col1, col2 = st.columns([2, 1])
