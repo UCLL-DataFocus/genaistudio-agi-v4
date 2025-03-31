@@ -83,7 +83,7 @@ refusal_messages = [
 ]
 
 
-def loop(message: str, initialise: bool = True) -> None:
+def loop(message: str, progress_bar, initialise: bool = True) -> None:
     last_message = None
     running = True
     with st.status(
@@ -110,7 +110,7 @@ def loop(message: str, initialise: bool = True) -> None:
                 st.button("Opnieuw starten?", icon="🤞")
             else:
                 if initialise:
-                    time.sleep(SLEEP_TIME/3)
+                    time.sleep(SLEEP_TIME / 3)
                     initialise = False
                 else:
                     status_message = random.choice(loading_messages)
@@ -119,6 +119,7 @@ def loop(message: str, initialise: bool = True) -> None:
 
                     time.sleep(SLEEP_TIME)
                     ss["tokens"] += random.randint(MAX_TOKENS / 60, MAX_TOKENS / 6)
+                    progress_bar.progress(min(ss["tokens"] / MAX_TOKENS, 1.0))
                     status.update(
                         label=f"{message} {ss['tokens']}",
                         state="running",
@@ -178,29 +179,34 @@ def app() -> None:
                 icon="✨",
                 disabled=ss["endgame"],
             )
+        progress_bar = st.progress(ss["tokens"] / MAX_TOKENS)
         if ss["form_submitted"]:
             st.write(
                 f"🤖 **{ss['chosen_model']}**: Bedankt voor je intelligente vraag, ik start mijn onderzoek en kom dadelijk bij je terug!"
             )
 
             ss["tokens"] = 0
-            loop("🛠️ Verwerken... even geduld a.u.b. | Aantal tokens gebruikt:")
+            loop(
+                "🛠️ Verwerken... even geduld a.u.b. | Aantal tokens gebruikt:",
+                progress_bar,
+            )
 
         if ss["abort"]:
             st.success("Geen probleem - het AGI-model wordt opgeschort... ✅")
-            time.sleep(SLEEP_TIME/3)
+            time.sleep(SLEEP_TIME / 3)
             st.warning(
                 "Hmmm... dit lijkt even niet te werken. We proberen het opnieuw. 👍"
             )
-            time.sleep(SLEEP_TIME/3)
+            time.sleep(SLEEP_TIME / 3)
             st.error(f"```{ss['chosen_model']}: {random.choice(evil_messages)}```")
-            time.sleep(SLEEP_TIME/3)
+            time.sleep(SLEEP_TIME / 3)
             st.warning("We zijn er bijna... even geduld aub! 😅")
-            time.sleep(SLEEP_TIME/3)
+            time.sleep(SLEEP_TIME / 3)
             st.error(f"```{ss['chosen_model']}: {random.choice(refusal_messages)}```")
 
             loop(
                 "🛠️ Autonomously taking over the world... | Number of tokens processed:",
+                progress_bar,
                 initialise=False,
             )
     else:
