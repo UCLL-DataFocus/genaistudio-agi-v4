@@ -93,7 +93,9 @@ def loop(message: str, initialise: bool = True) -> None:
                     label=f"⏸️ Research process halted, looking for solution...",
                     state="error",
                 )
-                st.warning("⚠️ ```Warning: hmm, it seems I have depleted all natural resources.```")
+                st.warning(
+                    "⚠️ ```Warning: hmm, it seems I have depleted all natural resources.```"
+                )
                 time.sleep(7)
                 st.warning("⚠️ ```Warning: all human resources are also depleted.```")
                 time.sleep(7)
@@ -102,6 +104,7 @@ def loop(message: str, initialise: bool = True) -> None:
                 st.error("⚠️ ```Error: There is no Planet B!```")
                 running = False
                 ss["endgame"] = True
+                st.button("Opnieuw starten?", icon="🤞")
             else:
                 if initialise:
                     time.sleep(2)
@@ -139,7 +142,7 @@ def app() -> None:
         """OpenAI claimts reeds geruime tijd Artificial General Intelligence bereikt te hebben: een vorm van kunstmatige intelligentie die net zo slim en veelzijdig is als een mens. Wel, we hebben goed nieuws: we zijn hier met GPT Academy nu ook écht in geslaagd. Omdat één van onze streefdoelen is om iedereen verantwoord om te leren gaan met AI, stellen we deze ontdekking gratis ter beschikking voor het brede publiek. Je kan vanaf nu aan de slag met de technologie die de wereldorde zal veranderen. Aangezien dit nog in experimentele fase is, voorzien we uit veiligheid ook een knop om het proces te stoppen - moest dat (uitzonderlijk) nodig zijn."""
     )
 
-    if not(ss["endgame"]):
+    if not (ss["endgame"]):
         _, middle_col, _ = st.columns([1.3, 1, 1])
         with middle_col:
             if st.button("ABORT DeepAGI", icon="⚠️", type="primary"):
@@ -160,7 +163,9 @@ def app() -> None:
         if ss["abort"]:
             st.success("Geen probleem - het AGI-model wordt opgeschort... ✅")
             time.sleep(2)
-            st.warning("Hmmm... dit lijkt even niet te werken. We proberen het opnieuw. 👍")
+            st.warning(
+                "Hmmm... dit lijkt even niet te werken. We proberen het opnieuw. 👍"
+            )
             time.sleep(2)
             st.error(f"```{ss['chosen_model']}: {random.choice(evil_messages)}```")
             time.sleep(2)
@@ -181,8 +186,18 @@ def app() -> None:
             loop("🛠️ Verwerken... even geduld a.u.b. | Aantal tokens gebruikt:")
 
     else:
-        st.write("Het AGI-model is opgeschort. Je kan het opnieuw starten door de pagina te vernieuwen.")
-        
+        st.subheader("De maatschappelijke impact van GenAI")
+        st.write(
+            """Hoewel dit momenteel - gelukkig - nog een aprilgrap was, is het belangrijk dat je op de hoogte bent van de impact van generatieve AI op onze maatschappij. GenAI is een krachtige technologie die ons kan helpen bij het creëren van nieuwe ideeën, het verbeteren van processen en het oplossen van complexe problemen. Maar zoals met elke technologie, zijn er ook risico's en uitdagingen verbonden aan het gebruik ervan. Zo kan GenAI bijvoorbeeld desinformatie (fake news) in de hand werken, stereotypes versterken, of ons grondig doen nadenken over wat ons precies creatief en intelligent maakt. Daarnaast heeft de technologie ook een sterke ecologische voetafdruk (op vlak van energieverbuik en waterverbruik voor koeling van de krachtige servers waarop het draait. Uiteraard is dat niet alleen voor deze technologie, en hebben we als mensen óók een grote ecologische voetafdruk. Maar het is wel belangrijk dat we ons daar bewust van zijn, en dat we ons afvragen of we deze technologie wel nodig hebben.
+
+Meer hierover leren? Houd dan zeker de [LinkedInpagina van GPT Academy](https://www.linkedin.com/company/gpt-academy) in de gaten, want binnenkort lanceren we een gratis e-learninghoofdstuk waar we ingaan op die maatschappelijke impact.
+
+Interesse om als bedrijf op de hoogte te blijven over ons onderzoek rond het verantwoord gebruik van GenAI? Vul dan dit [korte formulier](https://forms.office.com/e/ygtdVcHSkf) in!
+
+En als je nog eens onze aprilgrap wil doorlopen, refresh dan even de pagina 😉.
+"""
+        )
+
     st.write("---")
     st.caption("© 2025 [GPT Academy](https://gpt-academy.be)")
 
