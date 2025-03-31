@@ -38,7 +38,7 @@ loading_messages = [
     "🤔 kritische geest van 10 mensen verlaagd...",
     "🕵️ de privacy van 100 mensen geschonden...",
     "❓ werkonzekerheid verhoogd bij 50 mensen...",
-    "💕 25 professionals emotioneel gemanipuleerd...",
+    "💕 25 burgers emotioneel gemanipuleerd...",
     "🧠 verwarring gecreëerd rond de 'intelligentie' van AI bij 4 organisaties...",
     "🐟 600 vissen oververhit door de afkoeling van de servers...",
 ]
