@@ -18,6 +18,6 @@ def show_llm_ui() -> None:
     st.sidebar.selectbox(
         "Kies een model:",
         options=model_options,
-        index=0,
+        index=1,
         key="selected_model",
     )

@@ -21,6 +21,8 @@ langchain-openai = "^0.2.8"
 langchain-mistralai = "^0.2.6"
 azure-ai-inference = "^1.0.0b9"
 azure-core = "^1.32.0"
+langchain-core = "^0.3.49"
+pydantic = "^2.11.1"
 
 [tool.poetry.group.test.dependencies]  # https://python-poetry.org/docs/master/managing-dependencies/
 coverage = { extras = ["toml"], version = ">=7.4.4" }

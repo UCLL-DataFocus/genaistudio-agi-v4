@@ -1,6 +1,6 @@
 import streamlit as st
 from src.components.model_selection import show_llm_ui
-from src.components.chat import show_chat_interface
+from src.components.chat_component import show_chat_interface
 
 
 
@@ -29,7 +29,6 @@ def app():
     """
     )
     # Show LLM selection UI
-    show_llm_ui()
     show_chat_interface()
   
 if __name__ == "__main__":
