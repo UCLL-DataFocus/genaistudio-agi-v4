@@ -217,7 +217,7 @@ En als je nog eens onze aprilgrap wil doorlopen, refresh dan even de pagina 😉
 
     st.write("---")
     st.caption(
-        "© 2025 [GPT Academy](https://gpt-academy.be) | Bekijk de opensourcecode op [GitHub](https://github.com/UCLL-DataFocus/gpt-academy-deep-agi)"
+        "© 2025 [GPT Academy](https://gpt-academy.be) | Bekijk de opensourcecode op [GitHub](https://github.com/UCLL-DataFocus/gpt-academy-deep-agi) | Je prompts worden niet opgeslagen."
     )
 
 
