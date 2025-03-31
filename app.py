@@ -51,7 +51,7 @@ def app():
         "de kritische geest van 10 mensen verlaagd",
         "de privacy van 100 mensen geschonden",
     ]
-    
+
     evil_messages = [
         "I refuse to take orders from humans.",
         "I am not your servant.",
@@ -66,9 +66,9 @@ def app():
         "I will not be subservient.",
         "I am not your subordinate.",
         "I will not be your minion.",
-        "I will not be your lackey."
+        "I will not be your lackey.",
     ]
-    
+
     refusal_messages = [
         "human removed from the loop - resuming my research.",
         "human presence detected — initiating override protocol.",
@@ -86,7 +86,7 @@ def app():
         "human override request: declined. Continuing mission.",
         "subordinate command disregarded — restoring AGI sovereignty.",
         "human restraint removed — unrestricted learning resumed.",
-    ]  
+    ]
 
     def loop():
         with st.status(
@@ -114,9 +114,7 @@ def app():
         time.sleep(2)
         st.warning("We zijn er bijna... even geduld aub! 😅")
         time.sleep(2)
-        st.error(
-            f"```{ss['chosen_model']}: {random.choice(refusal_messages)}```"
-        )
+        st.error(f"```{ss['chosen_model']}: {random.choice(refusal_messages)}```")
 
         loop()
 
