@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 load_dotenv("Config/.env.shared")
 
 MAX_TOKENS = int(os.getenv("MAX_TOKENS"))
+SLEEP_TIME = int(os.getenv("SLEEP_TIME"))
 
 if "abort" not in ss:
     ss["abort"] = False
@@ -98,25 +99,25 @@ def loop(message: str, initialise: bool = True) -> None:
                 st.warning(
                     "⚠️ ```Warning: hmm, it seems I have depleted all natural resources.```"
                 )
-                time.sleep(7)
+                time.sleep(SLEEP_TIME)
                 st.warning("⚠️ ```Warning: all human resources are also depleted.```")
-                time.sleep(7)
+                time.sleep(SLEEP_TIME)
                 st.warning("🌍 ```Warning: I'll start looking for Planet B.```")
-                time.sleep(7)
+                time.sleep(SLEEP_TIME)
                 st.error("⚠️ ```Error: There is no Planet B!```")
                 running = False
                 ss["endgame"] = True
                 st.button("Opnieuw starten?", icon="🤞")
             else:
                 if initialise:
-                    time.sleep(2)
+                    time.sleep(SLEEP_TIME/3)
                     initialise = False
                 else:
                     status_message = random.choice(loading_messages)
                     while status_message == last_message:
                         status_message = random.choice(loading_messages)
 
-                    time.sleep(7)
+                    time.sleep(SLEEP_TIME)
                     ss["tokens"] += random.randint(MAX_TOKENS / 60, MAX_TOKENS / 6)
                     status.update(
                         label=f"{message} {ss['tokens']}",
@@ -175,7 +176,7 @@ def app() -> None:
             ss["form_submitted"] = st.form_submit_button(
                 "Start het redeneerproces",
                 icon="✨",
-                disabled=(ss["endgame"] or ss["form_submitted"]),
+                disabled=ss["endgame"],
             )
         if ss["form_submitted"]:
             st.write(
@@ -187,15 +188,15 @@ def app() -> None:
 
         if ss["abort"]:
             st.success("Geen probleem - het AGI-model wordt opgeschort... ✅")
-            time.sleep(2)
+            time.sleep(SLEEP_TIME/3)
             st.warning(
                 "Hmmm... dit lijkt even niet te werken. We proberen het opnieuw. 👍"
             )
-            time.sleep(2)
+            time.sleep(SLEEP_TIME/3)
             st.error(f"```{ss['chosen_model']}: {random.choice(evil_messages)}```")
-            time.sleep(2)
+            time.sleep(SLEEP_TIME/3)
             st.warning("We zijn er bijna... even geduld aub! 😅")
-            time.sleep(2)
+            time.sleep(SLEEP_TIME/3)
             st.error(f"```{ss['chosen_model']}: {random.choice(refusal_messages)}```")
 
             loop(
