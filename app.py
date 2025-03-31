@@ -192,18 +192,24 @@ def app() -> None:
             )
 
         if ss["abort"]:
-            st.success("Geen probleem - het AGI-model wordt opgeschort... ✅")
+            alert1 = st.success("Geen probleem - het AGI-model wordt opgeschort... ✅")
             time.sleep(SLEEP_TIME / 3)
-            st.warning(
+            alert2 = st.warning(
                 "Hmmm... dit lijkt even niet te werken. We proberen het opnieuw. 👍"
             )
             time.sleep(SLEEP_TIME / 3)
-            st.error(f"```{ss['chosen_model']}: {random.choice(evil_messages)}```")
+            alert3 = st.error(f"```{ss['chosen_model']}: {random.choice(evil_messages)}```")
             time.sleep(SLEEP_TIME / 3)
-            st.warning("We zijn er bijna... even geduld aub! 😅")
+            alert4 = st.warning("We zijn er bijna... even geduld aub! 😅")
             time.sleep(SLEEP_TIME / 3)
-            st.error(f"```{ss['chosen_model']}: {random.choice(refusal_messages)}```")
-
+            alert5 = st.error(f"```{ss['chosen_model']}: {random.choice(refusal_messages)}```")
+            time.sleep(SLEEP_TIME / 3)
+            alert1.empty()
+            alert2.empty()
+            alert3.empty()
+            alert4.empty()
+            alert5.empty()
+            
             loop(
                 "🛠️ Autonomously taking over the world... | Number of tokens processed:",
                 progress_bar,
