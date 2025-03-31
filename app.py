@@ -10,7 +10,7 @@ if "tokens" not in ss:
     ss["tokens"] = 0
 
 
-def app():
+def app() -> None:
     sidebar_logo = "Images/genai-studio-logo.png"
 
     st.logo(sidebar_logo, icon_image=sidebar_logo, size="large")
@@ -89,7 +89,7 @@ def app():
         "human restraint removed — unrestricted learning resumed.",
     ]
 
-    def loop():
+    def loop() -> None:
         last_message = None  # Track the last message
         with st.status(
             f"Verwerken... even geduld aub! Aantal tokens gebruikt: {ss['tokens']}",
@@ -110,7 +110,6 @@ def app():
                     state="running",
                 )
 
-    # Input van gebruiker
     user_question = st.text_input("Stel hier je complexe vraag:")
 
     if ss["abort"]:
