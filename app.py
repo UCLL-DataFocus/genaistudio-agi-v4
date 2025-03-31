@@ -194,17 +194,17 @@ def app() -> None:
 
             if ss["abort"]:
                 alert1 = st.success("Geen probleem - het AGI-model wordt opgeschort... ✅")
-                time.sleep(SLEEP_TIME / 3)
+                time.sleep(SLEEP_TIME / 2)
                 alert2 = st.warning(
                     "Hmmm... dit lijkt even niet te werken. We proberen het opnieuw. 👍"
                 )
-                time.sleep(SLEEP_TIME / 3)
+                time.sleep(SLEEP_TIME / 2)
                 alert3 = st.error(f"```{ss['chosen_model']}: {random.choice(evil_messages)}```")
-                time.sleep(SLEEP_TIME / 3)
+                time.sleep(SLEEP_TIME / 2)
                 alert4 = st.warning("We zijn er bijna... even geduld aub! 😅")
-                time.sleep(SLEEP_TIME / 3)
+                time.sleep(SLEEP_TIME / 2)
                 alert5 = st.error(f"```{ss['chosen_model']}: {random.choice(refusal_messages)}```")
-                time.sleep(SLEEP_TIME / 3)
+                time.sleep(SLEEP_TIME / 2)
                 alert1.empty()
                 alert2.empty()
                 alert3.empty()
