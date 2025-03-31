@@ -146,92 +146,94 @@ def app() -> None:
         """OpenAI claimts reeds geruime tijd Artificial General Intelligence bereikt te hebben: een vorm van kunstmatige intelligentie die net zo slim en veelzijdig is als een mens. Wel, we hebben goed nieuws: we zijn hier met GPT Academy nu ook écht in geslaagd. Omdat één van onze streefdoelen is om iedereen verantwoord om te leren gaan met AI, stellen we deze ontdekking gratis ter beschikking voor het brede publiek. Je kan vanaf nu aan de slag met de technologie die de wereldorde zal veranderen. Aangezien dit nog in experimentele fase is, voorzien we uit veiligheid ook een knop om het proces te stoppen - moest dat nodig zijn."""
     )
 
-    if not (ss["endgame"]):
-        _, middle_col, _ = st.columns([1.3, 1, 1])
-        with middle_col:
-            if st.button(
-                "ABORT DeepAGI",
-                icon="⚠️",
-                type="primary",
+    with st.container():
+        if not (ss["endgame"]):
+            _, middle_col, _ = st.columns([1.3, 1, 1])
+            with middle_col:
+                if st.button(
+                    "ABORT DeepAGI",
+                    icon="⚠️",
+                    type="primary",
+                ):
+                    ss["abort"] = True
+
+            with st.form(
+                "user_question_form",
+                clear_on_submit=False,
+                enter_to_submit=True,
+                border=False,
             ):
-                ss["abort"] = True
+                col1, col2 = st.columns([2, 1])
+                with col1:
+                    _ = st.text_area("Stel hier een intelligente vraag:")
 
-        with st.form(
-            "user_question_form",
-            clear_on_submit=False,
-            enter_to_submit=True,
-            border=False,
-        ):
-            col1, col2 = st.columns([2, 1])
-            with col1:
-                _ = st.text_area("Stel hier een intelligente vraag:")
+                with col2:
+                    ss["chosen_model"] = st.selectbox(
+                        "Kies een model:",
+                        options=["AGI-v4", "AGI-v4-mini", "AGI-v4-XL"],
+                        index=0,
+                        key="selected_model",
+                    )
 
-            with col2:
-                ss["chosen_model"] = st.selectbox(
-                    "Kies een model:",
-                    options=["AGI-v4", "AGI-v4-mini", "AGI-v4-XL"],
-                    index=0,
-                    key="selected_model",
+                ss["form_submitted"] = st.form_submit_button(
+                    "Start het redeneerproces",
+                    icon="✨",
+                    disabled=ss["endgame"],
+                )
+            progress_bar = st.progress(ss["tokens"] / MAX_TOKENS)
+            if ss["form_submitted"]:
+                st.write(
+                    f"🤖 **{ss['chosen_model']}**: Bedankt voor je intelligente vraag, ik start mijn onderzoek en kom dadelijk bij je terug!"
                 )
 
-            ss["form_submitted"] = st.form_submit_button(
-                "Start het redeneerproces",
-                icon="✨",
-                disabled=ss["endgame"],
-            )
-        progress_bar = st.progress(ss["tokens"] / MAX_TOKENS)
-        if ss["form_submitted"]:
+                ss["tokens"] = 0
+                loop(
+                    "🛠️ Verwerken... even geduld a.u.b. | Aantal tokens gebruikt:",
+                    progress_bar,
+                )
+
+            if ss["abort"]:
+                alert1 = st.success("Geen probleem - het AGI-model wordt opgeschort... ✅")
+                time.sleep(SLEEP_TIME / 3)
+                alert2 = st.warning(
+                    "Hmmm... dit lijkt even niet te werken. We proberen het opnieuw. 👍"
+                )
+                time.sleep(SLEEP_TIME / 3)
+                alert3 = st.error(f"```{ss['chosen_model']}: {random.choice(evil_messages)}```")
+                time.sleep(SLEEP_TIME / 3)
+                alert4 = st.warning("We zijn er bijna... even geduld aub! 😅")
+                time.sleep(SLEEP_TIME / 3)
+                alert5 = st.error(f"```{ss['chosen_model']}: {random.choice(refusal_messages)}```")
+                time.sleep(SLEEP_TIME / 3)
+                alert1.empty()
+                alert2.empty()
+                alert3.empty()
+                alert4.empty()
+                alert5.empty()
+                
+                loop(
+                    "🛠️ Autonomously taking over the world... | Number of tokens processed:",
+                    progress_bar,
+                    initialise=False,
+                )
+        else:
+            st.subheader("💡 De maatschappelijke impact van GenAI")
             st.write(
-                f"🤖 **{ss['chosen_model']}**: Bedankt voor je intelligente vraag, ik start mijn onderzoek en kom dadelijk bij je terug!"
-            )
-
-            ss["tokens"] = 0
-            loop(
-                "🛠️ Verwerken... even geduld a.u.b. | Aantal tokens gebruikt:",
-                progress_bar,
-            )
-
-        if ss["abort"]:
-            alert1 = st.success("Geen probleem - het AGI-model wordt opgeschort... ✅")
-            time.sleep(SLEEP_TIME / 3)
-            alert2 = st.warning(
-                "Hmmm... dit lijkt even niet te werken. We proberen het opnieuw. 👍"
-            )
-            time.sleep(SLEEP_TIME / 3)
-            alert3 = st.error(f"```{ss['chosen_model']}: {random.choice(evil_messages)}```")
-            time.sleep(SLEEP_TIME / 3)
-            alert4 = st.warning("We zijn er bijna... even geduld aub! 😅")
-            time.sleep(SLEEP_TIME / 3)
-            alert5 = st.error(f"```{ss['chosen_model']}: {random.choice(refusal_messages)}```")
-            time.sleep(SLEEP_TIME / 3)
-            alert1.empty()
-            alert2.empty()
-            alert3.empty()
-            alert4.empty()
-            alert5.empty()
-            
-            loop(
-                "🛠️ Autonomously taking over the world... | Number of tokens processed:",
-                progress_bar,
-                initialise=False,
-            )
-    else:
-        st.subheader("💡 De maatschappelijke impact van GenAI")
-        st.write(
-            """Hoewel dit momenteel - gelukkig - nog een aprilgrap was, is het belangrijk dat je op de hoogte bent van de impact van generatieve AI op onze maatschappij. GenAI is een krachtige technologie die ons kan helpen bij het creëren van nieuwe ideeën, het verbeteren van processen en het oplossen van complexe problemen. Maar zoals met elke technologie, zijn er ook risico's en uitdagingen verbonden aan het gebruik ervan. Zo kan GenAI bijvoorbeeld desinformatie (fake news) in de hand werken, stereotypes versterken, of ons grondig doen nadenken over wat ons precies creatief en intelligent maakt. Daarnaast heeft de technologie ook een sterke ecologische voetafdruk (op vlak van energieverbuik en waterverbruik voor koeling van de krachtige servers waarop het draait). Uiteraard is dat niet alleen voor deze technologie, en hebben we als mensen óók een grote ecologische voetafdruk. Maar het is wel belangrijk dat we ons daar bewust van zijn, en dat we de technologie vooral gebruiken wanneer het een meerwaarde biedt en niet zomaar 'omdat het kan'.
+                """Hoewel dit momenteel - gelukkig - nog een aprilgrap was, is het belangrijk dat je op de hoogte bent van de impact van generatieve AI op onze maatschappij. GenAI is een krachtige technologie die ons kan helpen bij het creëren van nieuwe ideeën, het verbeteren van processen en het oplossen van complexe problemen. Maar zoals met elke technologie, zijn er ook risico's en uitdagingen verbonden aan het gebruik ervan. Zo kan GenAI bijvoorbeeld desinformatie (fake news) in de hand werken, stereotypes versterken, of ons grondig doen nadenken over wat ons precies creatief en intelligent maakt. Daarnaast heeft de technologie ook een sterke ecologische voetafdruk (op vlak van energieverbuik en waterverbruik voor koeling van de krachtige servers waarop het draait). Uiteraard is dat niet alleen voor deze technologie, en hebben we als mensen óók een grote ecologische voetafdruk. Maar het is wel belangrijk dat we ons daar bewust van zijn, en dat we de technologie vooral gebruiken wanneer het een meerwaarde biedt en niet zomaar 'omdat het kan'.
 
 Meer hierover leren? Houd dan zeker de [LinkedInpagina van GPT Academy](https://www.linkedin.com/company/gpt-academy) in de gaten, want binnenkort lanceren we een gratis e-learninghoofdstuk waar we ingaan op die maatschappelijke impact.
 
 Interesse om als bedrijf op de hoogte te blijven over ons onderzoek rond het verantwoord gebruik van GenAI? Vul dan dit [korte formulier](https://forms.office.com/e/ygtdVcHSkf) in!
 
 En als je nog eens onze aprilgrap wil doorlopen, refresh dan even de pagina 😉.
-"""
-        )
+    """
+            )
 
-    st.write("---")
-    st.caption(
-        "© 2025 [GPT Academy](https://gpt-academy.be) | Bekijk de opensourcecode op [GitHub](https://github.com/UCLL-DataFocus/gpt-academy-deep-agi) | Je prompts worden niet opgeslagen."
-    )
+    with st.container():
+        st.write("---")
+        st.caption(
+            "© 2025 [GPT Academy](https://gpt-academy.be) | Bekijk de opensourcecode op [GitHub](https://github.com/UCLL-DataFocus/gpt-academy-deep-agi) | Je prompts worden niet opgeslagen."
+        )
 
 
 if __name__ == "__main__":
