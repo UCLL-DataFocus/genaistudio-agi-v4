@@ -183,7 +183,7 @@ def app() -> None:
             progress_bar = st.progress(ss["tokens"] / MAX_TOKENS)
             if ss["form_submitted"]:
                 st.write(
-                    f"🤖 **{ss['chosen_model']}**: Bedankt voor je intelligente vraag, ik start mijn onderzoek en kom dadelijk bij je terug!"
+                    f"🤖 **{ss['chosen_model']}**: Bedankt voor je intelligente vraag. Ik start mijn onderzoek en kom dadelijk bij je terug!"
                 )
 
                 ss["tokens"] = 0
