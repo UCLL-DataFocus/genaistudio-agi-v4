@@ -1,25 +1,7 @@
-# genaistudio-agi-v4
+# GPT Academy bereikt AGI
 
 A Python app that reticulates splines.
 
-## Using
+Hoewel OpenAI reeds geruime tijd claimt Artificial General Intelligence bereikt te hebben, zijn we hier met GPT Academy nu ook echt in geslaagd. Omdat één van onze streefdoelen is om iedereen verantwoord om te leren gaan met AI, stellen we deze ontdekking gratis ter beschikking voor het brede publiek. Je kan vanaf nu aan de slag met de technologie die de wereldorde zal veranderen via 👉 [deze link](https://rstudio-connect.ds.ucll.be/agi-v4)
 
-## Contributing
-
-<details>
-<summary>Developing</summary>
-
-- Run `poe` from within the development environment to print a list of [Poe the Poet](https://github.com/nat-n/poethepoet) tasks available to run on this project.
-- Run `poetry add {package}` from within the development environment to install a run time dependency and add it to `pyproject.toml` and `poetry.lock`. Add `--group test` or `--group dev` to install a CI or development dependency, respectively.
-- Run `poetry update` from within the development environment to upgrade all dependencies to the latest versions allowed by `pyproject.toml`.
-
-</details>
-
-## Researchers
-
-This project is conducted by:
-
-- **Project Lead:** Joren Bex
-- **Other Authors:** Michael Bauwens, Heike Pauli, Jonas Buysse
-
-For more details or to track progress, visit the [OpenProject board](https://ucll.openproject.com/projects/genai-studio/).
+![AGI-v4-launch-poster](https://github.com/UCLL-DataFocus/genaistudio-agi-v4/blob/main/Images/AGI-v4-launch-poster.png?raw=true)
