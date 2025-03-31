@@ -4,24 +4,19 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]  # https://python-poetry.org/docs/pyproject/
 name = "genaistudio-agi-v4"
-version = "0.0.0"
-description = "A Python app that reticulates splines."
+version = "4.0.0"
+description = "Artificial General Intelligence, powered by GPT Academy."
 authors = ["Joren Bex, Michael Bauwens, Heike Pauli, Jonas Buysse"]
 readme = "README.md"
-repository = "https://ucll.openproject.com/projects/genai-studio/"
 package-mode = false
 
 [tool.poetry.dependencies]  # https://python-poetry.org/docs/dependency-specification/
 streamlit = "1.41.1"
 poethepoet = "^0.33.0"
 python = ">=3.10.9,<4.0"
-langchain = "^0.3.7"
 python-dotenv = "^1.0.1"
 langchain-openai = "^0.2.8"
 langchain-mistralai = "^0.2.6"
-azure-ai-inference = "^1.0.0b9"
-azure-core = "^1.32.0"
-langchain-core = "^0.3.49"
 pydantic = "^2.11.1"
 
 [tool.poetry.group.test.dependencies]  # https://python-poetry.org/docs/master/managing-dependencies/
