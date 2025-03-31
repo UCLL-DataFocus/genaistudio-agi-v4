@@ -27,7 +27,7 @@ loading_messages = [
     "⚡ 1000 kWh stroom verbruikt",
     "🌳 20 bomen gekapt",
     "💼 de job afgenomen van 10 personen",
-    "🏢 2 industriën overbodig gemaakt",
+    "🏢 2 industrieën overbodig gemaakt",
     "⚖️ betrokken bij 5 copyrightprocessen",
     "📰 desinformatie verspreid aan de hand van 3 deepfakes",
     "🎨 creativiteit van 5 mensen gekopieerd",
